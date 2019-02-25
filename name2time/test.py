@@ -1,5 +1,5 @@
 
-def print_usage:
+def print_usage():
     print "Usage:"
     print "    name2time FILE    : change name of FILE"
     print "    name2time DIR     : change name of all files in DIR"

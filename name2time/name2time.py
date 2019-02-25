@@ -90,6 +90,11 @@ def change_name_to_time(orig_name, drill):
             new_name = get_fs_time(orig_name)
             if new_name == None:
                 new_name = prefix_name
+        else: # if we have hachoir time, compare it with fs time
+            fs_time = get_fs_time(orig_name)
+            if new_name > fs_time:
+                new_name = fs_time
+
     
     full_name = dir_name + "/" + new_name + "." + ext_name
     # make sure no duplication of name

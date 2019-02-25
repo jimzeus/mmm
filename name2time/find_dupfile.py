@@ -26,7 +26,7 @@ def sanity_check():
 def print_usage():
     print "Usage:"
     print "    find_dupfile.py DIR TEMP_DB"
-    print ""
+    print "Description:"
     print "    DIR: target directory to find out duplicated files in it"
     print "    TEMP_DB: temporary database to store data, must not exist"
 

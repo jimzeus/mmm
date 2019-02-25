@@ -50,6 +50,8 @@ def exif_metadata(file_name):
     for field in FIELDS:
         if field in tags:
             print "- " + field + ": " + str(tags[field])
+#    for field in tags:
+#        print "- " + field + ": " + str(tags[field])
 
 def fs_meta(filename):
 
