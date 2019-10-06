@@ -6,29 +6,29 @@ import os
 import sqlite3
 import sys
 import hashlib
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 
 def sanity_check():
     if len(sys.argv) != 3:
         return False
 
     if not os.path.isdir(sys.argv[1]):
-        print sys.argv[1] + " is not a directory!"
+        print(sys.argv[1] + " is not a directory!")
         return False
 
     if os.path.exists(sys.argv[2]):
-        print sys.argv[2] + " should NOT exist!"
+        print(sys.argv[2] + " should NOT exist!")
         return False
 
     return True
 
 def print_usage():
-    print "Usage:"
-    print "    find_dupfile.py DIR TEMP_DB"
-    print "Description:"
-    print "    DIR: target directory to find out duplicated files in it"
-    print "    TEMP_DB: temporary database to store data, must not exist"
+    print("Usage:")
+    print("    find_dupfile.py DIR TEMP_DB")
+    print("Description:")
+    print("    DIR: target directory to find out duplicated files in it")
+    print("    TEMP_DB: temporary database to store data, must not exist")
 
 def create_temp_db(tdb):
     con = sqlite3.connect(tdb)
@@ -45,7 +45,7 @@ def create_temp_db(tdb):
 
 
 def _FileMd5(filename):
-    print filename
+    print(filename)
     file_read_size = 8096
 
     if not os.path.isfile(filename):
