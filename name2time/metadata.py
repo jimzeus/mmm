@@ -4,36 +4,41 @@ import os
 import time
 import sys
 import exifread
-reload(sys)
-sys.setdefaultencoding('utf-8')
+#reload(sys)
+#sys.setdefaultencoding('utf-8')
 
-from hachoir_core.error import HachoirError
-from hachoir_core.cmd_line import unicodeFilename
-from hachoir_parser import createParser
-from hachoir_core.tools import makePrintable
-from hachoir_metadata import extractMetadata
-from hachoir_core.i18n import getTerminalCharset
+# uncomment the followings if you have hachoir-core package
+#
+#from hachoir_core.error import HachoirError
+#from hachoir_core.cmd_line import unicodeFilename
+#from hachoir_parser import createParser
+#from hachoir_core.tools import makePrintable
+#from hachoir_metadata import extractMetadata
+#from hachoir_core.i18n import getTerminalCharset
 
 # Get metadata for video file
 def hachoir_metadata(filename):
+
+    return None # comment this if you have hachoir_core package
+
     filename,realname = unicodeFilename(filename), filename
     parser = createParser(filename, realname)
     if not parser:
-        print "Unable to parse file"
+        print("Unable to parse file")
         return None
     try:
         metadata = extractMetadata(parser)
-    except HachoirError, err:
-        print "Metadata extraction error: %s" % unicode(err)
+    except HachoirError:
+        print("Metadata extraction error: %s" % unicode(err))
         metadata = None
     if not metadata:
-        print "Unable to extract metadata"
+        print("Unable to extract metadata")
         return None
 
     text = metadata.exportPlaintext()
     charset = getTerminalCharset()
     for line in text:
-        print makePrintable(line, charset)
+        print(makePrintable(line, charset))
 
     return metadata
 
@@ -41,7 +46,7 @@ def exif_metadata(file_name):
 
     FIELDS = ('EXIF DateTimeOriginal',)
 
-    print "EXIF Metadata:"
+    print("EXIF Metadata:")
     
     fd = open(file_name, 'rb')
     tags = exifread.process_file(fd)
@@ -49,17 +54,17 @@ def exif_metadata(file_name):
 
     for field in FIELDS:
         if field in tags:
-            print "- " + field + ": " + str(tags[field])
+            print("- " + field + ": " + str(tags[field]))
 #    for field in tags:
-#        print "- " + field + ": " + str(tags[field])
+#        print()"- " + field + ": " + str(tags[field]))
 
 def fs_meta(filename):
 
-    print "FS Metadata:"
+    print("FS Metadata:")
     stat = os.stat(pathname)
-    print "- Create Time: " + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stat.st_ctime))
-    print "- Modify Time: " + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stat.st_mtime))
-    print "- Access Time: " + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stat.st_atime))
+    print("- Create Time: " + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stat.st_ctime)))
+    print("- Modify Time: " + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stat.st_mtime)))
+    print("- Access Time: " + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(stat.st_atime)))
     
 def sanity_check():
     if len(sys.argv) != 2:
@@ -71,8 +76,8 @@ def sanity_check():
     return True
     
 def print_usage():
-    print "Usage:"
-    print "    metadata.py FILE    : show metadata of FILE"
+    print("Usage:")
+    print("    metadata.py FILE    : show metadata of FILE")
     
 if __name__ == "__main__":
     

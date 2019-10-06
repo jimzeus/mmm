@@ -51,7 +51,7 @@ def _FileMd5(filename):
     if not os.path.isfile(filename):
         return False
     myhash = hashlib.md5()
-    f = file(filename, 'rb')
+    f = open(filename, 'rb')
     while True:
         b = f.read(file_read_size)
         if not b:
